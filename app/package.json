@@ -1,0 +1,16 @@
+{
+  "name": "docker-node",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The study of Native JS version ES6+ using docker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "javascript",
+    "ES6+"
+  ],
+  "author": "Dilun7525",
+  "license": "ISC"
+}

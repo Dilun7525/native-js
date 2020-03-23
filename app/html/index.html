@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Guide to native js</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="container">
+	
+	<h1>Guide to native js</h1>
+	<div class="info">
+		<p>More to console!</p>
+	</div>
+	<ol>
+		<li class="item" id="1">Prototype</li>
+		<li class="item" id="2">Context</li>
+		<li class="item" id="3">Closure</li>
+		<li class="item" id="4">Event Loop, SetTimeout</li>
+		<li class="item" id="5">Promises</li>
+		<li class="item" id="6">Objects</li>
+		<li class="item" id="7">Classes</li>
+		<li class="item" id="8">Async, Await, Fetch</li>
+		<li class="item" id="9">Proxy</li>
+		<li class="item" id="10">Generators. Symbol iterator, for of</li>
+		<li class="item" id="11">Array methods (forEach, map, filter, reduce, find, findIndex)</li>
+		<li class="item" id="12">Map, Set, WeakMap, WeakSet</li>
+		<li class="item" id="13">Requests to the server. Fetch, XMLHttpRequest (XHR)</li>
+		<li class="item" id="14">Rest and Spread</li>
+		<li class="item" id="15">Destructurization</li>
+	</ol>
+	
+	<h1>Results work scripts:</h1>
+	<h3>7. Classes:</h3>
+	<div id="res_classes">
+		<div id="cl_box1"></div>
+		<div id="cl_box2"></div>
+		<div id="cl_circle"></div>
+	</div>
+	<!--14. Spread, rest-->
+	<div id="res_spread">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+	
+	<script src="1_prototype.js"			id="scr_1"></script>
+	<script src="2_context.js"				id="scr_2"></script>
+	<script src="3_closure.js"				id="scr_3"></script>
+	<script src="4_event_loop.js"			id="scr_4"></script>
+	<script src="5_promise.js"				id="scr_5"></script>
+	<script src="6_objects.js"				id="scr_6"></script>
+	<script src="7_classes.js"				id="scr_7"></script>
+	<script src="8_async_await_fetch.js"	id="scr_8"></script>
+	<script src="9_proxy.js"				id="scr_9"></script>
+	<script src="10_generators.js"			id="scr_10"></script>
+	<script src="11_array_methods.js"		id="scr_11"></script>
+	<script src="12_add_data_structure.js"	id="scr_12"></script>
+	<script src="13_requests_server.js"		id="scr_13"></script>
+	<script src="14_rest_spread.js"			id="scr_14"></script>
+	<script src="15_destructurization.js"	id="scr_15"></script>
+	
+	<script>
+		var items = document.querySelectorAll('.item');
+		
+		for(var item of items){
+			item.addEventListener('click', (event) => {
+				event.preventDefault();
+				
+				var divCodeOld = document.getElementById('code');
+				divCodeOld && divCodeOld.remove();
+				
+				var divCode = document.createElement('div');
+				divCode.id  = 'code';
+				
+				var script = document.querySelector('script[id="scr_' + event.target.getAttribute('id') + '"]');
+				
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', script.getAttribute('src'), false);
+				xhr.send();
+				if(xhr.status !== 200){
+					// обработать ошибку
+					console.log(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
+				} else{
+					xhr.response.replace(/(\n|\n\t|\t\n)/g, "<br>");
+					divCode.innerText = xhr.response;
+				}
+				
+				event.target.after(divCode);
+			});
+		}
+	</script>
+</div>
+</body>
+</html>

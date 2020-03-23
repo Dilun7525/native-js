@@ -1,0 +1,16 @@
+version: '2'
+services:
+  app:
+    container_name: docker-node
+    user: www-data
+    restart: always
+    build:
+      context: . # paths to the Docker file relative to the directory with the composite file
+      dockerfile: ./images/nodejs/Dockerfile
+      args:
+        UID: 1000 #user ID
+        GID: 1000 #user ID
+    ports:
+      - '3000:3000' # Port forwarding for external access local - >container
+    volumes:
+      - ./app:/usr/src/app
